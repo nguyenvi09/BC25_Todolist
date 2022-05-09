@@ -328,3 +328,13 @@ ul.todo#completed li .buttons .complete .far{
 ul.todo#completed span{
   color: #25b99a;
 }
+
+ul#todo .btn-delete, ul#todo .btn-check{
+  border: none;
+  padding: 5px;
+}
+
+ul#todo .btn-delete i,
+ul#todo .btn-check i{
+  color: gray;
+}
