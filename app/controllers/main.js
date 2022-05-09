@@ -22,6 +22,7 @@ const renderHTML = data => {
     getEle("todo").innerHTML = content;
 };
 
+//lấy dữ liệu
 const getTodoList = () => {
     service
         .fetchData()
@@ -34,3 +35,19 @@ const getTodoList = () => {
 };
 
 getTodoList();
+
+//thêm
+getEle("addItem").addEventListener("click", () => {
+    //lấy value
+    const newTask =  getEle("newTask").value;
+
+    const todo = new Todolist("", newTask);
+
+    service.addToDo(todo)
+        .then(() => {
+            getTodoList();
+        })
+        .catch(error =>{
+            console.log(error);
+        });
+});
