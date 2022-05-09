@@ -1,4 +1,4 @@
-class Services{
+export default class Services{
     fetchData(){
         return axios({
             url: "https://626614c8dbee37aff9abd41e.mockapi.io/api/todolist",
