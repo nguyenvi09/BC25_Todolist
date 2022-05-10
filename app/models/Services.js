@@ -21,4 +21,12 @@ export default class Services{
         });
     };
 
+    // updateTask(task){
+    //     return axios({
+    //         url: `https://626614c8dbee37aff9abd41e.mockapi.io/api/nguoiDung/${task.id}`,
+    //         method: "PUT",
+    //         data: task,
+    //     });
+    // };
+
 };

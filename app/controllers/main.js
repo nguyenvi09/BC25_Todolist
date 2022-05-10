@@ -1,3 +1,8 @@
+/**
+ * đánh dấu
+ * sắp xếp a->z và ngược lại
+ */
+
 import Services from "../models/Services.js";
 import Todolist from "../models/Todolist.js";
 
@@ -6,20 +11,21 @@ const service = new Services();
 const getEle = id => document.getElementById(id);
 
 //renderHTML 
-const renderHTML = data => {
+const renderHTML = (data) => {
     const content = data.reduce((contentHTML, item) => {
         return (contentHTML += `
             <li>
                 ${item.activity}
                 <div>
                     <button class="btn-delete" onclick="deleteTask(${item.id})"><i class="fa-solid fa-trash-can"></i></button>
-                    <button class ="btn-check"><i class="fa-solid fa-circle-check"></i></button>
+                    <button class="btn-check" onclick="checkComplete(${item.id})"><i class="fa-solid fa-circle-check"></i></button>
                 </div>    
             </li>
         `)
     }, "");
-
+    
     getEle("todo").innerHTML = content;
+            
 };
 
 //lấy dữ liệu
