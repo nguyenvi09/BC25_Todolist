@@ -12,7 +12,7 @@ const renderHTML = data => {
             <li>
                 ${item.activity}
                 <div>
-                    <button class="btn-delete"><i class="fa-solid fa-trash-can"></i></button>
+                    <button class="btn-delete" onclick="deleteTask(${item.id})"><i class="fa-solid fa-trash-can"></i></button>
                     <button class ="btn-check"><i class="fa-solid fa-circle-check"></i></button>
                 </div>    
             </li>
@@ -41,9 +41,9 @@ getEle("addItem").addEventListener("click", () => {
     //lấy value
     const newTask =  getEle("newTask").value;
 
-    const todo = new Todolist("", newTask);
+    const task = new Todolist("", newTask);
 
-    service.addToDo(todo)
+    service.addTask(task)
         .then(() => {
             getTodoList();
         })
@@ -51,3 +51,17 @@ getEle("addItem").addEventListener("click", () => {
             console.log(error);
         });
 });
+
+//xóa
+const deleteTask = id => {
+    service.deleteTask(id)
+        .then(() => {
+            getTodoList();
+        })
+        .catch(error => {
+            console.log(error);
+        });
+};
+window.deleteTask = deleteTask;
+
+//đánh dấu các việc làm xong

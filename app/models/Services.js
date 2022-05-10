@@ -6,11 +6,19 @@ export default class Services{
         });
     };
 
-    addToDo(todo){
+    addTask(task){
         return axios({
             url: "https://626614c8dbee37aff9abd41e.mockapi.io/api/todolist",
             method: "POST",
-            data: todo
+            data: task
         });
     };
+
+    deleteTask(id){
+        return axios({
+            url: `https://626614c8dbee37aff9abd41e.mockapi.io/api/todolist/${id}`,
+            method: "DELETE"
+        });
+    };
+
 };
