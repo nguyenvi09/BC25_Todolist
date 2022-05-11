@@ -329,13 +329,22 @@ ul.todo#completed span{
   color: #25b99a;
 }
 
-ul#todo .btn-delete, ul#todo .btn-check{
+.btn-delete, .btn-check{
   border: none;
   padding: 5px;
   cursor: pointer;
 }
 
-ul#todo .btn-delete i,
-ul#todo .btn-check i{
+.btn-delete i,
+.btn-check i{
   color: gray;
+}
+
+ul#completed li{
+  color: green;
+  font-weight: 900;
+}
+
+ul#completed .btn-check i{
+  color: green;
 }
