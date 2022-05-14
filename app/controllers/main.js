@@ -1,5 +1,5 @@
 /**
- * đánh dấu
+ * đánh dấu -> ok
  * sắp xếp a->z và ngược lại
  */
 
@@ -107,3 +107,51 @@ const checkComplete = id =>{
         });
 };
 window.checkComplete = checkComplete;
+
+//sắp xếp a->z
+getEle("two").addEventListener("click", ()=>{
+    service.fetchData()
+        .then(result => {
+            let arrFasle =  result.data.filter(item => item.status === false);
+            arrFasle.sort( (a, b) => {
+                const nameA = a.activity.toUpperCase();
+                const nameB = b.activity.toUpperCase();
+
+                if(nameA < nameB){
+                    return -1;
+                }
+                if(nameA > nameB){
+                    return 1;
+                }
+                return 0;
+            });
+            renderHTML(arrFasle);
+        })
+        .catch(error => {
+            console.log(error);
+        });
+});
+
+// sắp xếp z -> a
+getEle("three").addEventListener("click", ()=>{
+    service.fetchData()
+        .then(result => {
+            let arrFasle =  result.data.filter(item => item.status === false);
+            arrFasle.sort( (b, a) => {
+                const nameA = a.activity.toUpperCase();
+                const nameB = b.activity.toUpperCase();
+
+                if(nameA < nameB){
+                    return -1;
+                }
+                if(nameA > nameB){
+                    return 1;
+                }
+                return 0;
+            });
+            renderHTML(arrFasle);
+        })
+        .catch(error => {
+            console.log(error);
+        });
+});
