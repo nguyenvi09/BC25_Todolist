@@ -4,7 +4,7 @@
  */
 
 import Services from "../models/Services.js";
-import Todolist from "../models/Todolist.js";
+import Tasks from "../models/Tasks.js";
 
 const service = new Services();
 
@@ -64,7 +64,7 @@ getEle("addItem").addEventListener("click", () => {
     //lấy value
     const newTask =  getEle("newTask").value;
 
-    const task = new Todolist("", newTask);
+    const task = new Tasks("", newTask);
 
     service.addTask(task)
         .then(() => {
@@ -89,13 +89,14 @@ window.deleteTask = deleteTask;
 
 //đánh dấu các việc làm xong
 const checkComplete = id =>{
-    service
-        .getTaskById(id)
+    console.log(id);
+    service.getTaskById(id)
         .then(result => {
+            console.log(result);
             result.data.status = true;
 
             service.updateTask(result.data)
-                .then(result => {
+                .then(() => {
                     getTodoList();
                 })
                 .catch(error => {
@@ -108,50 +109,63 @@ const checkComplete = id =>{
 };
 window.checkComplete = checkComplete;
 
+
+//Hàm sắp xếp
+const sortTasks = (type = 0) => {
+    switch(type){
+        case 0:
+            service.fetchData()
+                .then(result => {
+                    let arrFasle =  result.data.filter(item => item.status === false);
+                    arrFasle.sort( (a, b) => {
+                        const nameA = a.activity.toUpperCase();
+                        const nameB = b.activity.toUpperCase();
+
+                        if(nameA < nameB){
+                            return -1;
+                        }
+                        if(nameA > nameB){
+                            return 1;
+                        }
+                        return 0;
+                    });
+                    renderHTML(arrFasle);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+            break;
+        case 1:
+            service.fetchData()
+                .then(result => {
+                    let arrFasle =  result.data.filter(item => item.status === false);
+                    arrFasle.sort( (b, a) => {
+                        const nameA = a.activity.toUpperCase();
+                        const nameB = b.activity.toUpperCase();
+
+                        if(nameA < nameB){
+                            return -1;
+                        }
+                        if(nameA > nameB){
+                            return 1;
+                        }
+                        return 0;
+                    });
+                    renderHTML(arrFasle);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+            break;
+    };
+};
+
 //sắp xếp a->z
 getEle("two").addEventListener("click", ()=>{
-    service.fetchData()
-        .then(result => {
-            let arrFasle =  result.data.filter(item => item.status === false);
-            arrFasle.sort( (a, b) => {
-                const nameA = a.activity.toUpperCase();
-                const nameB = b.activity.toUpperCase();
-
-                if(nameA < nameB){
-                    return -1;
-                }
-                if(nameA > nameB){
-                    return 1;
-                }
-                return 0;
-            });
-            renderHTML(arrFasle);
-        })
-        .catch(error => {
-            console.log(error);
-        });
+    sortTasks();
 });
 
 // sắp xếp z -> a
 getEle("three").addEventListener("click", ()=>{
-    service.fetchData()
-        .then(result => {
-            let arrFasle =  result.data.filter(item => item.status === false);
-            arrFasle.sort( (b, a) => {
-                const nameA = a.activity.toUpperCase();
-                const nameB = b.activity.toUpperCase();
-
-                if(nameA < nameB){
-                    return -1;
-                }
-                if(nameA > nameB){
-                    return 1;
-                }
-                return 0;
-            });
-            renderHTML(arrFasle);
-        })
-        .catch(error => {
-            console.log(error);
-        });
+    sortTasks(1);
 });
