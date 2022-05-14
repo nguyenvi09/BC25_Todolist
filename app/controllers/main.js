@@ -1,8 +1,3 @@
-/**
- * đánh dấu -> ok
- * sắp xếp a->z và ngược lại
- */
-
 import Services from "../models/Services.js";
 import Tasks from "../models/Tasks.js";
 
