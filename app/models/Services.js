@@ -1,38 +1,48 @@
-export default class Services{
-    fetchData(){
-        return axios({
-            url: "https://626614c8dbee37aff9abd41e.mockapi.io/api/todolist",
-            method: "GET"
-        });
-    };
+import { URL_API } from "./../config/constants.js";
 
-    addTask(task){
-        return axios({
-            url: "https://626614c8dbee37aff9abd41e.mockapi.io/api/todolist",
-            method: "POST",
-            data: task
-        });
-    };
+export default class Services {
+  callApi(uri, method, data) {
+    return axios({
+      url: URL_API + uri,
+      method,
+      data,
+    });
+  }
 
-    deleteTask(id){
-        return axios({
-            url: `https://626614c8dbee37aff9abd41e.mockapi.io/api/todolist/${id}`,
-            method: "DELETE"
-        });
-    };
+  //   fetchData() {
+  //     return axios({
+  //       url: "https://626614c8dbee37aff9abd41e.mockapi.io/api/todolist",
+  //       method: "GET",
+  //     });
+  //   }
 
-    getTaskById(id){
-        return axios({
-            url: `https://626614c8dbee37aff9abd41e.mockapi.io/api/todolist/${id}`,
-            method: "GET"
-        });
-    };
+  //   addTask(task) {
+  //     return axios({
+  //       url: "https://626614c8dbee37aff9abd41e.mockapi.io/api/todolist",
+  //       method: "POST",
+  //       data: task,
+  //     });
+  //   }
 
-    updateTask(task){
-        return axios({
-            url: `https://626614c8dbee37aff9abd41e.mockapi.io/api/todolist/${task.id}`,
-            method: "PUT",
-            data: task,
-        });
-    }
-};
+  //   deleteTask(id) {
+  //     return axios({
+  //       url: `https://626614c8dbee37aff9abd41e.mockapi.io/api/todolist/${id}`,
+  //       method: "DELETE",
+  //     });
+  //   }
+
+  getTaskById(id) {
+    return axios({
+      url: `https://626614c8dbee37aff9abd41e.mockapi.io/api/todolist/${id}`,
+      method: "GET",
+    });
+  }
+
+  updateTask(task) {
+    return axios({
+      url: `https://626614c8dbee37aff9abd41e.mockapi.io/api/todolist/${task.id}`,
+      method: "PUT",
+      data: task,
+    });
+  }
+}
